@@ -128,10 +128,9 @@ public class ProximitySensor implements AccelerometerListener.ChangeListener,
         // We ignore incoming state because we do not want to enable proximity
         // sensor during incoming call screen. We check hasLiveCall() because a disconnected call
         // can also put the in-call screen in the INCALL state.
-        hasOngoingCall = InCallState.INCALL == newState && callList.hasLiveCall();
+        boolean hasOngoingCall = InCallState.INCALL == newState && callList.hasLiveCall();
         boolean isOffhook = (InCallState.OUTGOING == newState) || hasOngoingCall;
         boolean isOutgoing = (InCallState.OUTGOING == newState);
-        mHasIncomingCall = (InCallState.INCOMING == newState);
 
         // remove any pending audio changes scheduled
         mHandler.removeCallbacks(mRunnable);
